@@ -54,6 +54,7 @@ public class shooterWheelShoot extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
+        shooterWheelSubsystem.shooterWheel.set(0.9);
     }
 
     // Called once the command ends or is interrupted.
@@ -64,7 +65,7 @@ public class shooterWheelShoot extends CommandBase {
     // Returns true when the command should end.
     @Override
     public boolean isFinished() {
-        return false;
+        return true;
     }
 
     @Override

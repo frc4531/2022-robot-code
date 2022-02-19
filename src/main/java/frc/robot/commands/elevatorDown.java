@@ -54,6 +54,8 @@ public class elevatorDown extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
+        elevatorSubsystem.elevatorLMotor.set(-0.6);
+        elevatorSubsystem.elevatorVerticalMotor.set(0.6);
     }
 
     // Called once the command ends or is interrupted.
@@ -64,7 +66,7 @@ public class elevatorDown extends CommandBase {
     // Returns true when the command should end.
     @Override
     public boolean isFinished() {
-        return false;
+        return true;
     }
 
     @Override
