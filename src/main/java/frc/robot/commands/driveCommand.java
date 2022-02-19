@@ -54,7 +54,7 @@ public class driveCommand extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        driveSubsystem.driveTrain.driveCartesian(RobotContainer.getInstance().getdriveStick().getY(), RobotContainer.getInstance().getdriveStick().getX(), RobotContainer.getInstance().getdriveStick().getZ());
+        driveSubsystem.driveTrain.driveCartesian(RobotContainer.getInstance().getdriveStick().getY(), RobotContainer.getInstance().getdriveStick().getX(), -RobotContainer.getInstance().getdriveStick().getZ());
     }
 
     // Called once the command ends or is interrupted.
