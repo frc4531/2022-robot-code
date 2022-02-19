@@ -128,7 +128,7 @@ final JoystickButton climberRightDownButton = new JoystickButton(driveStick, 8);
 climberRightDownButton.whileHeld(new climberRightDown( m_climberRightSubsystem ) ,true);
     SmartDashboard.putData("climberRightDownButton",new climberRightDown( m_climberRightSubsystem ) );
 
-final JoystickButton shooterWheelShootButton = new JoystickButton(nesStick, 1);        
+final JoystickButton shooterWheelShootButton = new JoystickButton(nesStick, 7);        
 shooterWheelShootButton.toggleWhenPressed(new shooterWheelShoot( m_shooterWheelSubsystem ) ,true);
     SmartDashboard.putData("shooterWheelShootButton",new shooterWheelShoot( m_shooterWheelSubsystem ) );
 
@@ -136,39 +136,39 @@ final JoystickButton shooterTurretLeftButton = new JoystickButton(nesStick, 1);
 shooterTurretLeftButton.whileHeld(new shooterTurretLeft( m_shooterTurretSubsystem ) ,true);
     SmartDashboard.putData("shooterTurretLeftButton",new shooterTurretLeft( m_shooterTurretSubsystem ) );
 
-final JoystickButton shooterTurretRightButton = new JoystickButton(nesStick, 1);        
+final JoystickButton shooterTurretRightButton = new JoystickButton(nesStick, 2);        
 shooterTurretRightButton.whileHeld(new shooterTurretRight( m_shooterTurretSubsystem ) ,true);
     SmartDashboard.putData("shooterTurretRightButton",new shooterTurretRight( m_shooterTurretSubsystem ) );
 
-final JoystickButton shooterAngleUpButton = new JoystickButton(nesStick, 1);        
+final JoystickButton shooterAngleUpButton = new JoystickButton(nesStick, 3);        
 shooterAngleUpButton.whileHeld(new shooterAngleUp( m_shooterAngleSubsystem ) ,true);
     SmartDashboard.putData("shooterAngleUpButton",new shooterAngleUp( m_shooterAngleSubsystem ) );
 
-final JoystickButton shooterAngleDownButton = new JoystickButton(nesStick, 1);        
+final JoystickButton shooterAngleDownButton = new JoystickButton(nesStick, 4);        
 shooterAngleDownButton.whileHeld(new shooterAngleDown( m_shooterAngleSubsystem ) ,true);
     SmartDashboard.putData("shooterAngleDownButton",new shooterAngleDown( m_shooterAngleSubsystem ) );
 
-final JoystickButton shooterLiftUpButton = new JoystickButton(nesStick, 1);        
+final JoystickButton shooterLiftUpButton = new JoystickButton(nesStick, 5);        
 shooterLiftUpButton.whileHeld(new shooterLiftUp( m_shooterLiftSubsystem ) ,true);
     SmartDashboard.putData("shooterLiftUpButton",new shooterLiftUp( m_shooterLiftSubsystem ) );
 
-final JoystickButton shooterLiftDownButton = new JoystickButton(nesStick, 1);        
+final JoystickButton shooterLiftDownButton = new JoystickButton(nesStick, 6);        
 shooterLiftDownButton.whileHeld(new shooterLiftDown( m_shooterLiftSubsystem ) ,true);
     SmartDashboard.putData("shooterLiftDownButton",new shooterLiftDown( m_shooterLiftSubsystem ) );
 
-final JoystickButton elevatorUpButton = new JoystickButton(nesStick, 1);        
+final JoystickButton elevatorUpButton = new JoystickButton(nesStick, 10);        
 elevatorUpButton.whileHeld(new elevatorUp( m_elevatorSubsystem ) ,true);
     SmartDashboard.putData("elevatorUpButton",new elevatorUp( m_elevatorSubsystem ) );
 
-final JoystickButton elevatorDownButton = new JoystickButton(nesStick, 1);        
+final JoystickButton elevatorDownButton = new JoystickButton(nesStick, 11);        
 elevatorDownButton.whileHeld(new elevatorDown( m_elevatorSubsystem ) ,true);
     SmartDashboard.putData("elevatorDownButton",new elevatorDown( m_elevatorSubsystem ) );
 
-final JoystickButton intakeInButton = new JoystickButton(nesStick, 1);        
+final JoystickButton intakeInButton = new JoystickButton(nesStick, 9);        
 intakeInButton.whileHeld(new intakeIn( m_intakeSubsystem ) ,true);
     SmartDashboard.putData("intakeInButton",new intakeIn( m_intakeSubsystem ) );
 
-final JoystickButton intakeOutButton = new JoystickButton(nesStick, 1);        
+final JoystickButton intakeOutButton = new JoystickButton(nesStick, 8);        
 intakeOutButton.whileHeld(new intakeOut( m_intakeSubsystem ) ,true);
     SmartDashboard.putData("intakeOutButton",new intakeOut( m_intakeSubsystem ) );
 
