@@ -129,7 +129,7 @@ climberRightDownButton.whileHeld(new climberRightDown( m_climberRightSubsystem )
     SmartDashboard.putData("climberRightDownButton",new climberRightDown( m_climberRightSubsystem ) );
 
 final JoystickButton shooterWheelShootButton = new JoystickButton(nesStick, 7);        
-shooterWheelShootButton.toggleWhenPressed(new shooterWheelShoot( m_shooterWheelSubsystem ) ,true);
+shooterWheelShootButton.whileHeld(new shooterWheelShoot( m_shooterWheelSubsystem ) ,true);
     SmartDashboard.putData("shooterWheelShootButton",new shooterWheelShoot( m_shooterWheelSubsystem ) );
 
 final JoystickButton shooterTurretLeftButton = new JoystickButton(nesStick, 1);        

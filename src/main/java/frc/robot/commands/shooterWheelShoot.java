@@ -54,7 +54,7 @@ public class shooterWheelShoot extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        shooterWheelSubsystem.shooterWheel.set(0.9);
+        shooterWheelSubsystem.shooterWheel.set(-0.9);
     }
 
     // Called once the command ends or is interrupted.
