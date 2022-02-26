@@ -118,7 +118,7 @@ final JoystickButton climberDownButton = new JoystickButton(driveStick, 10);
 climberDownButton.whileHeld(new climberDown( m_climberSubsystem ) ,true);
     //SmartDashboard.putData("climberLeftDownButton",new climberDown( m_climberSubsystem ) );
 
-final JoystickButton shooterWheelShootButton = new JoystickButton(nesStick, 7);        
+final JoystickButton shooterWheelShootButton = new JoystickButton(nesStick, 9);        
 shooterWheelShootButton.whileHeld(new shooterWheelShoot( m_shooterWheelSubsystem ) ,true);
     //SmartDashboard.putData("shooterWheelShootButton",new shooterWheelShoot( m_shooterWheelSubsystem ) );
 
@@ -146,19 +146,19 @@ final JoystickButton shooterLiftDownButton = new JoystickButton(nesStick, 6);
 shooterLiftDownButton.whileHeld(new shooterLiftDown( m_shooterLiftSubsystem ) ,true);
     //SmartDashboard.putData("shooterLiftDownButton",new shooterLiftDown( m_shooterLiftSubsystem ) );
 
-final JoystickButton elevatorUpButton = new JoystickButton(nesStick, 10);        
+final JoystickButton elevatorUpButton = new JoystickButton(nesStick, 7);        
 elevatorUpButton.whileHeld(new elevatorUp( m_elevatorSubsystem ) ,true);
     //SmartDashboard.putData("elevatorUpButton",new elevatorUp( m_elevatorSubsystem ) );
 
-final JoystickButton elevatorDownButton = new JoystickButton(nesStick, 11);        
+final JoystickButton elevatorDownButton = new JoystickButton(nesStick, 8);        
 elevatorDownButton.whileHeld(new elevatorDown( m_elevatorSubsystem ) ,true);
     //SmartDashboard.putData("elevatorDownButton",new elevatorDown( m_elevatorSubsystem ) );
 
-final JoystickButton intakeInButton = new JoystickButton(nesStick, 9);        
+final JoystickButton intakeInButton = new JoystickButton(nesStick, 12);        
 intakeInButton.whileHeld(new intakeIn( m_intakeSubsystem ) ,true);
     //SmartDashboard.putData("intakeInButton",new intakeIn( m_intakeSubsystem ) );
 
-final JoystickButton intakeOutButton = new JoystickButton(nesStick, 8);        
+final JoystickButton intakeOutButton = new JoystickButton(nesStick, 13);        
 intakeOutButton.whileHeld(new intakeOut( m_intakeSubsystem ) ,true);
     //SmartDashboard.putData("intakeOutButton",new intakeOut( m_intakeSubsystem ) );
 
