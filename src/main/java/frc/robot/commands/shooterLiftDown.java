@@ -54,7 +54,7 @@ public class shooterLiftDown extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        shooterLiftSubsystem.shooterLift.set(-0.6);
+        shooterLiftSubsystem.shooterLift.set(-0.9);
     }
 
     // Called once the command ends or is interrupted.
