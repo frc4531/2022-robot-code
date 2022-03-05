@@ -55,7 +55,6 @@ public class elevatorStill extends CommandBase {
     @Override
     public void execute() {
         elevatorSubsystem.elevatorLMotor.set(0);
-        elevatorSubsystem.elevatorVerticalMotor.set(0);
     }
 
     // Called once the command ends or is interrupted.
