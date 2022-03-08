@@ -57,16 +57,16 @@ public static AHRS driveGyro;
         
         frontLeft = new WPI_TalonFX(1);
         frontLeft.setInverted(true);
-        frontLeft.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
+        //frontLeft.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
  
 
 frontRight = new WPI_TalonFX(2);
-frontRight.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
+//frontRight.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
  
 
 backLeft = new WPI_TalonFX(3);
 backLeft.setInverted(true);
-backLeft.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
+//backLeft.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
  
 
 backRight = new WPI_TalonFX(4);
@@ -87,6 +87,7 @@ driveTrain.setMaxOutput(0.9);
     public void periodic() {
         // This method will be called once per scheduler run
         SmartDashboard.putNumber("BR Encoder Position", getPosition());
+        SmartDashboard.putNumber("Tilt", driveGyro.getRoll());
     }
 
     @Override
@@ -110,7 +111,7 @@ driveTrain.setMaxOutput(0.9);
     }
 
     public static double readHeading() {
-    	double gyroVal = driveGyro.getAngle(); //getAngle
+    	double gyroVal = driveGyro.getYaw(); //getAngle
     	SmartDashboard.putNumber("Drive Gyro Value", gyroVal);
     	return gyroVal;
     }

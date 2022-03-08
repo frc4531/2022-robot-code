@@ -39,7 +39,7 @@ public class autoCommand extends SequentialCommandGroup {
         //          new command3(argsN, subsystem)
         //      )    
         //  );
-            new gyroStraightDrive(RobotContainer.getInstance().m_driveSubsystem, 50000)
+            //new gyroStraightDrive(RobotContainer.getInstance().m_driveSubsystem, 50000)
         );
     }
 
