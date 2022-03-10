@@ -114,7 +114,7 @@ private final Joystick driveStick = new Joystick(0);
 // Create some buttons
 
 final JoystickButton testButton = new JoystickButton(driveStick, 1);        
-testButton.whileHeld(new trackGoal(m_visionSubsystem, m_driveSubsystem) ,true);
+testButton.whileHeld(new trackGoal(m_visionSubsystem, m_driveSubsystem, m_shooterAngleSubsystem) ,true);
 
 
 final JoystickButton climberUpBotton = new JoystickButton(driveStick, 7);        
