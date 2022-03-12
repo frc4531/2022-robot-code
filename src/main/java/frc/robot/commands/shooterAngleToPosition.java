@@ -29,8 +29,10 @@ public class shooterAngleToPosition extends CommandBase {
     public void execute() {
         if (m_shooterAngleSubsystem.getPosition() < position) {
             shooterAngleSubsystem.shooterAngler.set(moveSpeed);
-        } else if (m_shooterAngleSubsystem.getPosition() > position) {
+        } else if (m_shooterAngleSubsystem.getPosition() > position && m_shooterAngleSubsystem.limitSwitch.get()) {
             shooterAngleSubsystem.shooterAngler.set(-moveSpeed);
+        } else {
+        shooterAngleSubsystem.shooterAngler.set(0);
         }
     }
 

@@ -69,6 +69,12 @@ public class RobotContainer {
     final JoystickButton testButton = new JoystickButton(driveStick, 1);        
     testButton.whileHeld(new trackGoal(m_visionSubsystem, m_driveSubsystem, m_shooterAngleSubsystem) ,true);
 
+    final JoystickButton trackButtonStageOne = new JoystickButton(driveStick, 2);        
+    trackButtonStageOne.whileHeld(new trackGoal(m_visionSubsystem, m_driveSubsystem, m_shooterAngleSubsystem), true);
+
+    final JoystickButton trackButtonStageTwo = new JoystickButton(driveStick, 2);        
+    trackButtonStageTwo.whenReleased(new trackGoal(m_visionSubsystem, m_driveSubsystem, m_shooterAngleSubsystem), false);
+
 
     final JoystickButton climberUpBotton = new JoystickButton(driveStick, 7);        
     climberUpBotton.whileHeld(new climberUp( m_climberSubsystem ) ,true);

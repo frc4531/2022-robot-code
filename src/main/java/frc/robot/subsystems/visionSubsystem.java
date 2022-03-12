@@ -50,7 +50,6 @@ public class visionSubsystem extends SubsystemBase {
         SmartDashboard.putNumber("Limelight Y Value", visY);
         SmartDashboard.putNumber("Limelight A Value", visA);
         SmartDashboard.putNumber("Limelight V Value", visV);
-
     }
 
     @Override
