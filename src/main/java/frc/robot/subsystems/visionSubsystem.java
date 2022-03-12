@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class visionSubsystem extends SubsystemBase {
     public Spark ledBlinkin = new Spark(0);
+    public boolean isLinedUp;
 
     NetworkTableEntry xEntry;
     NetworkTableEntry yEntry;
@@ -34,13 +35,13 @@ public class visionSubsystem extends SubsystemBase {
         yEntry = table.getEntry("ty");
         aEntry = table.getEntry("ta");
         vEntry = table.getEntry("tv");
+
+        isLinedUp = false;
     }
 
     @Override
     public void periodic() {
         // This method will be called once per scheduler run
-        ledBlinkin.set(Preferences.getDouble("LEDValue", 0));
-
         visX = xEntry.getDouble(0.0);
         visY = yEntry.getDouble(0.0);
         visA = aEntry.getDouble(0.0);

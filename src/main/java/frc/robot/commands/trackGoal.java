@@ -1,6 +1,4 @@
 package frc.robot.commands;
-import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.*;
 
@@ -30,8 +28,6 @@ public class trackGoal extends CommandBase {
 
     double trackedThreshold = 10;
 
-    double initTime;
-
 
     public trackGoal(visionSubsystem vision_subsystem, driveSubsystem drive_subsystem, shooterAngleSubsystem shooterAngleSubsystem, shooterWheelSubsystem shooterWheelSubsystem) {
         
@@ -49,7 +45,7 @@ public class trackGoal extends CommandBase {
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
-        initTime = Timer.getFPGATimestamp();
+        
     }
 
     // Called every time the scheduler runs while the command is scheduled.
@@ -104,6 +100,15 @@ public class trackGoal extends CommandBase {
             } else {
                 doneTrackingY = false;
             }
+
+            //Send signal if X and Y are both lined up
+            if (doneTrackingX && doneTrackingY) {
+                m_visionSubsystem.isLinedUp = true;
+                m_visionSubsystem.ledBlinkin.set(0.77);
+            } else {
+                m_visionSubsystem.isLinedUp = false;
+                m_visionSubsystem.ledBlinkin.set(0.61);
+            }
         }
         
     }
@@ -116,8 +121,8 @@ public class trackGoal extends CommandBase {
     // Returns true when the command should end.
     @Override
     public boolean isFinished() {
-        //End if X and Y tracking are both complete or command times out
-        return (doneTrackingX && doneTrackingY) || (initTime + Timer.getFPGATimestamp()) >= 5;
+        //End if X and Y tracking are both complete
+        return (doneTrackingX && doneTrackingY);
     }
 
     @Override
