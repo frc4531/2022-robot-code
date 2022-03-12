@@ -67,11 +67,11 @@ public class RobotContainer {
 
   private void configureButtonBindings() {
     // ------- Test buttons to remove when not debugging -------
-    final JoystickButton testToPositionButton = new JoystickButton(nesStick, 10);
-    testToPositionButton.whenPressed(new shooterAngleToPosition(m_shooterAngleSubsystem, Preferences.getDouble("anglePos", 2000)));
+    //final JoystickButton testToPositionButton = new JoystickButton(nesStick, 10);
+    //testToPositionButton.whenPressed(new shooterAngleToPosition(m_shooterAngleSubsystem, Preferences.getDouble("anglePos", 2000)));
 
     // ------- Create some buttons -------
-    final JoystickButton trackButton = new JoystickButton(driveStick, 1);        
+    final JoystickButton trackButton = new JoystickButton(nesStick, 9);        
     trackButton.whileHeld(new trackGoal(m_visionSubsystem, m_driveSubsystem, m_shooterAngleSubsystem, m_shooterWheelSubsystem) ,true);
 
 
@@ -83,7 +83,7 @@ public class RobotContainer {
     climberDownButton.whileHeld(new climberDown( m_climberSubsystem ) ,true);
 
 
-    final JoystickButton shooterWheelShootButton = new JoystickButton(nesStick, 9);        
+    final JoystickButton shooterWheelShootButton = new JoystickButton(nesStick, 10);        
     shooterWheelShootButton.whileHeld(new shooterWheelShoot( m_shooterWheelSubsystem ) ,true);
 
 

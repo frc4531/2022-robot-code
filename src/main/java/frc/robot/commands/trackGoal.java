@@ -52,7 +52,7 @@ public class trackGoal extends CommandBase {
     @Override
     public void execute() {
         // ------- SPIN UP SHOOTER WHEEL -------
-        //shooterWheelSubsystem.shooterWheel.set(-0.9);
+        shooterWheelSubsystem.shooterWheel.set(-0.8);
 
         // Only track the target if there is a target to track
         if(m_visionSubsystem.visV == 1) {

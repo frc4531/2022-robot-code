@@ -22,7 +22,7 @@ public class climberUp extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        climberSubsystem.climberLeftMotor.set(0.6);
+        climberSubsystem.climberLeftMotor.set(0.8);
     }
 
     // Called once the command ends or is interrupted.
