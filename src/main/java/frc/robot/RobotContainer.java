@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.subsystems.*;
 
@@ -67,13 +68,13 @@ public class RobotContainer {
   private void configureButtonBindings() {
     // Create some buttons
     final JoystickButton testButton = new JoystickButton(driveStick, 1);        
-    testButton.whileHeld(new trackGoal(m_visionSubsystem, m_driveSubsystem, m_shooterAngleSubsystem) ,true);
+    testButton.whenPressed(new trackGoal(m_visionSubsystem, m_driveSubsystem, m_shooterAngleSubsystem, m_shooterWheelSubsystem) ,true);
 
     final JoystickButton trackButtonStageOne = new JoystickButton(driveStick, 2);        
-    trackButtonStageOne.whileHeld(new trackGoal(m_visionSubsystem, m_driveSubsystem, m_shooterAngleSubsystem), true);
+    trackButtonStageOne.whileHeld(new trackShootWhileHeld(), true);
 
-    final JoystickButton trackButtonStageTwo = new JoystickButton(driveStick, 2);        
-    trackButtonStageTwo.whenReleased(new trackGoal(m_visionSubsystem, m_driveSubsystem, m_shooterAngleSubsystem), false);
+    //final JoystickButton trackButtonStageTwo = new JoystickButton(driveStick, 2);        
+    //trackButtonStageTwo.whenReleased(new trackGoal(m_visionSubsystem, m_driveSubsystem, m_shooterAngleSubsystem), false);
 
 
     final JoystickButton climberUpBotton = new JoystickButton(driveStick, 7);        
@@ -82,6 +83,10 @@ public class RobotContainer {
 
     final JoystickButton climberDownButton = new JoystickButton(driveStick, 8);        
     climberDownButton.whileHeld(new climberDown( m_climberSubsystem ) ,true);
+
+
+    final JoystickButton testToPositionButton = new JoystickButton(nesStick, 10);
+    testToPositionButton.whenPressed(new shooterAngleToPosition(m_shooterAngleSubsystem, Preferences.getDouble("anglePos", 2000)));
 
 
     final JoystickButton shooterWheelShootButton = new JoystickButton(nesStick, 9);        

@@ -23,7 +23,11 @@ public class shooterAngleDown extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        shooterAngleSubsystem.shooterAngler.set(-0.6);
+        if(m_shooterAngleSubsystem.limitSwitch.get()) {
+            shooterAngleSubsystem.shooterAngler.set(-0.6);
+        } else {
+            shooterAngleSubsystem.shooterAngler.set(0);
+        }
     }
 
     // Called once the command ends or is interrupted.

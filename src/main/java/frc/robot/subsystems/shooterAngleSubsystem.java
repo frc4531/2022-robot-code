@@ -31,6 +31,11 @@ public class shooterAngleSubsystem extends SubsystemBase {
         // This method will be called once per scheduler run
         SmartDashboard.putNumber("Angler Encoder Value", getPosition());
         SmartDashboard.putBoolean("Angler Encoder Pressed", limitSwitch.get());
+        
+        
+        if (!limitSwitch.get()) {
+            resetEncoder();
+        }
     }
 
     @Override

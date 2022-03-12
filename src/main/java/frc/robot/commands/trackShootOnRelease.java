@@ -19,9 +19,9 @@ public class trackShootOnRelease extends ParallelDeadlineGroup {
     // addCommands().
     super(new WaitCommand(3));
     addCommands(
-      new trackGoal(RobotContainer.getInstance().m_visionSubsystem, RobotContainer.getInstance().m_driveSubsystem, RobotContainer.getInstance().m_shooterAngleSubsystem),
-      new shooterWheelShoot(RobotContainer.getInstance().m_shooterWheelSubsystem),
-      new shooterLiftUp(RobotContainer.getInstance().m_shooterLiftSubsystem)
+      //new trackGoal(RobotContainer.getInstance().m_visionSubsystem, RobotContainer.getInstance().m_driveSubsystem, RobotContainer.getInstance().m_shooterAngleSubsystem),
+      //new shooterWheelShoot(RobotContainer.getInstance().m_shooterWheelSubsystem),
+      //new shooterLiftUp(RobotContainer.getInstance().m_shooterLiftSubsystem)
     );
     
       

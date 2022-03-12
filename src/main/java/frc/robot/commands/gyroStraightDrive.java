@@ -21,9 +21,9 @@ public class gyroStraightDrive extends CommandBase {
 
     private final driveSubsystem m_driveSubsystem;
  
-    double baseSpeed;
-	double maxSpeed;
-	double distance;
+    double baseSpeed; //Defines our starting, slower speed
+	double maxSpeed; //Defines our maximum speed
+	double distance; //Determines the distance we need to travel (encoder ticks)
 
 
     public gyroStraightDrive(driveSubsystem subsystem, double distance) {
@@ -37,37 +37,36 @@ public class gyroStraightDrive extends CommandBase {
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
-        driveSubsystem.resetEncoder();
+        driveSubsystem.resetEncoder(); //Start by reseting our encoder to zero
     	
-    	baseSpeed = Preferences.getDouble("StraightGyro-BaseSpeed", 0.1);
-    	maxSpeed = Preferences.getDouble("StraightGyro-MaxSpeed", 0.1);
+    	baseSpeed = Preferences.getDouble("StraightGyro-BaseSpeed", 0.1); //Set our base speed based on Robot Preferences
+    	maxSpeed = Preferences.getDouble("StraightGyro-MaxSpeed", 0.1); //Set our max speed based on Robot Preferences
 
     }
 
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        Double heading = driveSubsystem.readHeading();
-        SmartDashboard.putNumber("Gyro Angle", heading);
+        Double heading = driveSubsystem.readHeading(); //Grab our current angle from the gyro
+        SmartDashboard.putNumber("Gyro Angle", heading); //Post current angle to SmartDashboard for debug
     	
-    	if (baseSpeed <= maxSpeed){
-    		baseSpeed += 0.005;
+    	if (baseSpeed <= maxSpeed){ //if we haven't hit max speed
+    		baseSpeed += 0.005; //accelerate
     	}
     	
-    	if (distance - 10 <= driveSubsystem.getPosition() && baseSpeed >= 0.55){
-    		baseSpeed = (baseSpeed - 0.02);
+    	if (distance - 10 <= driveSubsystem.getPosition() && baseSpeed >= 0.55){ //if we are about to hit our target distance
+    		baseSpeed = (baseSpeed - 0.02); //decelerate
     	}
     	
-    	Double left = (baseSpeed + (0.025 * heading));
-    	Double right = (baseSpeed - (0.025 * heading));
+    	Double left = (baseSpeed + (0.025 * heading)); //slightly adjust left side based on current angle
+    	Double right = (baseSpeed - (0.025 * heading)); //slightly adjust right side based on current angle
     	
-    	
-    	SmartDashboard.putNumber("GSD Current Speed", baseSpeed);
 
-    	//driveSubsystem.driveTrain.tankDrive(-left, -right);
+        //set our left side wheels to the above calculated left speed
         driveSubsystem.frontLeft.set(-left);
         driveSubsystem.backLeft.set(-left);
 
+        //set our right side wheels to the above calculated right speed
         driveSubsystem.frontRight.set(-right);
         driveSubsystem.backRight.set(-right);
     }
@@ -75,13 +74,13 @@ public class gyroStraightDrive extends CommandBase {
     // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
-        driveSubsystem.driveTrain.driveCartesian(0, 0, 0);
+        driveSubsystem.driveTrain.driveCartesian(0, 0, 0); //brake when we hit our final distance
     }
 
     // Returns true when the command should end.
     @Override
     public boolean isFinished() {
-        return driveSubsystem.getPosition() < distance;
+        return driveSubsystem.getPosition() < distance; //finish command if we have reached our final destination
     }
 
     @Override

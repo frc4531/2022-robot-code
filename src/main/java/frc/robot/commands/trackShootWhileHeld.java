@@ -16,8 +16,8 @@ public class trackShootWhileHeld extends ParallelCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      new trackGoal(RobotContainer.getInstance().m_visionSubsystem, RobotContainer.getInstance().m_driveSubsystem, RobotContainer.getInstance().m_shooterAngleSubsystem),
-      new shooterWheelShoot(RobotContainer.getInstance().m_shooterWheelSubsystem)
+      //new trackGoal(RobotContainer.getInstance().m_visionSubsystem, RobotContainer.getInstance().m_driveSubsystem, RobotContainer.getInstance().m_shooterAngleSubsystem),
+      //new shooterWheelShoot(RobotContainer.getInstance().m_shooterWheelSubsystem)
     );
   }
 }
