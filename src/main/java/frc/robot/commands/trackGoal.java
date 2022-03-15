@@ -26,7 +26,7 @@ public class trackGoal extends CommandBase {
     double minAnglerPosition = 0;
     double maxAnglerPosition = 5727; //Subtract 73 from actual value here
 
-    double trackedThreshold = 10;
+    double trackedThreshold = 100;
 
 
     public trackGoal(visionSubsystem vision_subsystem, driveSubsystem drive_subsystem, shooterAngleSubsystem shooterAngleSubsystem, shooterWheelSubsystem shooterWheelSubsystem) {
@@ -122,7 +122,7 @@ public class trackGoal extends CommandBase {
     @Override
     public boolean isFinished() {
         //End if X and Y tracking are both complete
-        return (doneTrackingX && doneTrackingY);
+        return false;
     }
 
     @Override

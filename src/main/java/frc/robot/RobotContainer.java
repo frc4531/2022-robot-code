@@ -87,35 +87,35 @@ public class RobotContainer {
     shooterWheelShootButton.whileHeld(new shooterWheelShoot( m_shooterWheelSubsystem ) ,true);
 
 
-    final JoystickButton intakeLiftDownButton = new JoystickButton(nesStick, 1);        
+    final JoystickButton intakeLiftDownButton = new JoystickButton(nesStick, 4);        
     intakeLiftDownButton.whileHeld(new intakeLiftDown( m_intakeLiftSubsystem ) ,true);
 
 
-    final JoystickButton intakeLiftUpButton = new JoystickButton(nesStick, 2);        
+    final JoystickButton intakeLiftUpButton = new JoystickButton(nesStick, 3);        
     intakeLiftUpButton.whileHeld(new intakeLiftUp( m_intakeLiftSubsystem ) ,true);
 
 
-    final JoystickButton shooterAngleUpButton = new JoystickButton(nesStick, 3);        
+    final JoystickButton shooterAngleUpButton = new JoystickButton(nesStick, 2);        
     shooterAngleUpButton.whileHeld(new shooterAngleUp( m_shooterAngleSubsystem ) ,true);
 
 
-    final JoystickButton shooterAngleDownButton = new JoystickButton(nesStick, 4);        
+    final JoystickButton shooterAngleDownButton = new JoystickButton(nesStick, 1);        
     shooterAngleDownButton.whileHeld(new shooterAngleDown( m_shooterAngleSubsystem ) ,true);
 
 
-    final JoystickButton shooterLiftUpButton = new JoystickButton(nesStick, 5);        
+    final JoystickButton shooterLiftUpButton = new JoystickButton(nesStick, 6);        
     shooterLiftUpButton.whileHeld(new shooterLiftUp( m_shooterLiftSubsystem ) ,true);
 
 
-    final JoystickButton shooterLiftDownButton = new JoystickButton(nesStick, 6);        
+    final JoystickButton shooterLiftDownButton = new JoystickButton(nesStick, 5);        
     shooterLiftDownButton.whileHeld(new shooterLiftDown( m_shooterLiftSubsystem ) ,true);
 
 
-    final JoystickButton elevatorUpButton = new JoystickButton(nesStick, 7);        
+    final JoystickButton elevatorUpButton = new JoystickButton(nesStick, 8);        
     elevatorUpButton.whileHeld(new elevatorUp( m_elevatorSubsystem ) ,true);
 
 
-    final JoystickButton elevatorDownButton = new JoystickButton(nesStick, 8);        
+    final JoystickButton elevatorDownButton = new JoystickButton(nesStick, 7);        
     elevatorDownButton.whileHeld(new elevatorDown( m_elevatorSubsystem ) ,true);
 
 
