@@ -1,4 +1,5 @@
 package frc.robot.commands;
+import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.*;
 
@@ -24,9 +25,14 @@ public class trackGoal extends CommandBase {
 
     //Min and max angler position
     double minAnglerPosition = 0;
-    double maxAnglerPosition = 5727; //Subtract 73 from actual value here
+    double maxAnglerPosition = 4450; //Subtract 73 from actual value here
 
     double trackedThreshold = 100;
+
+    //Variables needed to set velocity for shooter
+    double currentSpeed;
+    double adjustInterval = 0.003;
+    double targetVelocity;// = -14000;
 
 
     public trackGoal(visionSubsystem vision_subsystem, driveSubsystem drive_subsystem, shooterAngleSubsystem shooterAngleSubsystem, shooterWheelSubsystem shooterWheelSubsystem) {
@@ -45,14 +51,22 @@ public class trackGoal extends CommandBase {
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
-        
+        currentSpeed = -0.8;
+        targetVelocity = -14000;//Preferences.getDouble("ShootVelocity", -14000);
     }
 
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        // ------- SPIN UP SHOOTER WHEEL -------
-        shooterWheelSubsystem.shooterWheel.set(-0.8);
+        // ------- SPIN UP SHOOTER WHEEL TO TARGET VELOCITY -------
+        if (m_shooterWheelSubsystem.getVelocity() < targetVelocity) {
+            currentSpeed += adjustInterval;
+        } else if (m_shooterWheelSubsystem.getVelocity() > targetVelocity) {
+            currentSpeed -= adjustInterval;
+        }
+
+        shooterWheelSubsystem.shooterWheel.set(currentSpeed);
+        //shooterWheelSubsystem.shooterWheel.set(-0.8);
 
         // Only track the target if there is a target to track
         if(m_visionSubsystem.visV == 1) {
@@ -104,11 +118,12 @@ public class trackGoal extends CommandBase {
             //Send signal if X and Y are both lined up
             if (doneTrackingX && doneTrackingY) {
                 m_visionSubsystem.isLinedUp = true;
-                m_visionSubsystem.ledBlinkin.set(0.77);
             } else {
                 m_visionSubsystem.isLinedUp = false;
-                m_visionSubsystem.ledBlinkin.set(0.61);
             }
+        } else {
+            shooterAngleSubsystem.shooterAngler.set(0);
+            driveSubsystem.driveTrain.driveCartesian(0, 0, 0);
         }
         
     }
@@ -116,6 +131,7 @@ public class trackGoal extends CommandBase {
     // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
+        m_visionSubsystem.isLinedUp = false;
     }
 
     // Returns true when the command should end.

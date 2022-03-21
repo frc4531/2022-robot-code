@@ -16,7 +16,7 @@ public class shooterWheelSubsystem extends SubsystemBase {
 
     public shooterWheelSubsystem() {
         shooterWheel = new WPI_TalonFX(5);
-        shooterWheel.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
+        //shooterWheel.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
     }
 
     @Override

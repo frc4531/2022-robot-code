@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class visionSubsystem extends SubsystemBase {
     public Spark ledBlinkin = new Spark(0);
+
     public boolean isLinedUp;
 
     NetworkTableEntry xEntry;
@@ -28,6 +29,8 @@ public class visionSubsystem extends SubsystemBase {
 
     
     public visionSubsystem() {
+        //ledBlinkin.set(0.65);
+
         NetworkTableInstance inst = NetworkTableInstance.getDefault();
         NetworkTable table = inst.getTable("limelight");
 
@@ -51,6 +54,12 @@ public class visionSubsystem extends SubsystemBase {
         SmartDashboard.putNumber("Limelight Y Value", visY);
         SmartDashboard.putNumber("Limelight A Value", visA);
         SmartDashboard.putNumber("Limelight V Value", visV);
+
+        if (isLinedUp) {
+            ledBlinkin.set(0.77);
+        } else {
+            ledBlinkin.set(0.61);
+        }
     }
 
     @Override

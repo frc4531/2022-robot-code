@@ -54,7 +54,10 @@ public class RobotContainer {
     m_climberTraverseSubsystem.setDefaultCommand(new climberTraverseStill(m_climberTraverseSubsystem) );
 
     // Configure autonomous sendable chooser
-    m_chooser.setDefaultOption("autoCommand", new autoCommand());
+    //m_chooser.setDefaultOption("autoCommand", new autoCommand(m_driveSubsystem));
+    //m_chooser.setDefaultOption("Move Forward", new autoMoveForward(m_driveSubsystem));
+    m_chooser.setDefaultOption("Shoot Single", new autoCommand(m_driveSubsystem, m_shooterWheelSubsystem, m_shooterLiftSubsystem, m_intakeLiftSubsystem, m_intakeSubsystem, m_elevatorSubsystem, m_visionSubsystem, m_shooterAngleSubsystem));
+    m_chooser.addOption("Move Forward", new autoMoveForward(m_driveSubsystem));
 
     SmartDashboard.putData("Auto Mode", m_chooser);
   }
@@ -71,8 +74,11 @@ public class RobotContainer {
     //testToPositionButton.whenPressed(new shooterAngleToPosition(m_shooterAngleSubsystem, Preferences.getDouble("anglePos", 2000)));
 
     // ------- Create some buttons -------
+    final JoystickButton intakeElevatorInButton = new JoystickButton(nesStick, 11);
+    intakeElevatorInButton.whileHeld(new intakeElevatorIn(m_intakeSubsystem, m_elevatorSubsystem));
+
     final JoystickButton trackButton = new JoystickButton(nesStick, 9);        
-    trackButton.whileHeld(new trackGoal(m_visionSubsystem, m_driveSubsystem, m_shooterAngleSubsystem, m_shooterWheelSubsystem) ,true);
+    trackButton.toggleWhenPressed(new trackGoal(m_visionSubsystem, m_driveSubsystem, m_shooterAngleSubsystem, m_shooterWheelSubsystem) ,true);
 
 
     final JoystickButton climberUpBotton = new JoystickButton(driveStick, 7);        
@@ -95,11 +101,11 @@ public class RobotContainer {
     intakeLiftUpButton.whileHeld(new intakeLiftUp( m_intakeLiftSubsystem ) ,true);
 
 
-    final JoystickButton shooterAngleUpButton = new JoystickButton(nesStick, 2);        
+    final JoystickButton shooterAngleUpButton = new JoystickButton(nesStick, 1);        
     shooterAngleUpButton.whileHeld(new shooterAngleUp( m_shooterAngleSubsystem ) ,true);
 
 
-    final JoystickButton shooterAngleDownButton = new JoystickButton(nesStick, 1);        
+    final JoystickButton shooterAngleDownButton = new JoystickButton(nesStick, 2);        
     shooterAngleDownButton.whileHeld(new shooterAngleDown( m_shooterAngleSubsystem ) ,true);
 
 
