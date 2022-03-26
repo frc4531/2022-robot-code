@@ -24,7 +24,6 @@ public class RobotContainer {
     public final intakeSubsystem m_intakeSubsystem = new intakeSubsystem();
     public final elevatorSubsystem m_elevatorSubsystem = new elevatorSubsystem();
     public final shooterLiftSubsystem m_shooterLiftSubsystem = new shooterLiftSubsystem();
-    public final shooterAngleSubsystem m_shooterAngleSubsystem = new shooterAngleSubsystem();
     public final intakeLiftSubsystem m_intakeLiftSubsystem = new intakeLiftSubsystem();
     public final shooterWheelSubsystem m_shooterWheelSubsystem = new shooterWheelSubsystem();
     public final visionSubsystem m_visionSubsystem = new visionSubsystem();
@@ -46,7 +45,6 @@ public class RobotContainer {
     m_driveSubsystem.setDefaultCommand(new driveCommand( m_driveSubsystem ) );
     m_shooterWheelSubsystem.setDefaultCommand(new shooterWheelStill( m_shooterWheelSubsystem ) );
     m_intakeLiftSubsystem.setDefaultCommand(new intakeLiftStill( m_intakeLiftSubsystem ) );
-    m_shooterAngleSubsystem.setDefaultCommand(new shooterAngleStill( m_shooterAngleSubsystem ) );
     m_shooterLiftSubsystem.setDefaultCommand(new shooterLiftStill( m_shooterLiftSubsystem ) );
     m_elevatorSubsystem.setDefaultCommand(new elevatorStill( m_elevatorSubsystem ) );
     m_intakeSubsystem.setDefaultCommand(new intakeStill( m_intakeSubsystem ) );
@@ -56,7 +54,7 @@ public class RobotContainer {
     // Configure autonomous sendable chooser
     //m_chooser.setDefaultOption("autoCommand", new autoCommand(m_driveSubsystem));
     //m_chooser.setDefaultOption("Move Forward", new autoMoveForward(m_driveSubsystem));
-    m_chooser.setDefaultOption("Shoot Single", new autoCommand(m_driveSubsystem, m_shooterWheelSubsystem, m_shooterLiftSubsystem, m_intakeLiftSubsystem, m_intakeSubsystem, m_elevatorSubsystem, m_visionSubsystem, m_shooterAngleSubsystem));
+    m_chooser.setDefaultOption("Shoot Single", new autoCommand(m_driveSubsystem, m_shooterWheelSubsystem, m_shooterLiftSubsystem, m_intakeLiftSubsystem, m_intakeSubsystem, m_elevatorSubsystem, m_visionSubsystem));
     m_chooser.addOption("Move Forward", new autoMoveForward(m_driveSubsystem));
 
     SmartDashboard.putData("Auto Mode", m_chooser);
@@ -78,7 +76,7 @@ public class RobotContainer {
     intakeElevatorInButton.whileHeld(new intakeElevatorIn(m_intakeSubsystem, m_elevatorSubsystem));
 
     final JoystickButton trackButton = new JoystickButton(nesStick, 9);        
-    trackButton.toggleWhenPressed(new trackGoal(m_visionSubsystem, m_driveSubsystem, m_shooterAngleSubsystem, m_shooterWheelSubsystem) ,true);
+    trackButton.toggleWhenPressed(new trackGoal(m_visionSubsystem, m_driveSubsystem, m_shooterWheelSubsystem) ,true);
 
 
     final JoystickButton climberUpBotton = new JoystickButton(driveStick, 7);        
@@ -101,12 +99,12 @@ public class RobotContainer {
     intakeLiftUpButton.whileHeld(new intakeLiftUp( m_intakeLiftSubsystem ) ,true);
 
 
-    final JoystickButton shooterAngleUpButton = new JoystickButton(nesStick, 1);        
-    shooterAngleUpButton.whileHeld(new shooterAngleUp( m_shooterAngleSubsystem ) ,true);
+    //final JoystickButton shooterAngleUpButton = new JoystickButton(nesStick, 1);        
+    //shooterAngleUpButton.whileHeld(new shooterAngleUp( m_shooterAngleSubsystem ) ,true);
 
 
-    final JoystickButton shooterAngleDownButton = new JoystickButton(nesStick, 2);        
-    shooterAngleDownButton.whileHeld(new shooterAngleDown( m_shooterAngleSubsystem ) ,true);
+    //final JoystickButton shooterAngleDownButton = new JoystickButton(nesStick, 2);        
+    //shooterAngleDownButton.whileHeld(new shooterAngleDown( m_shooterAngleSubsystem ) ,true);
 
 
     final JoystickButton shooterLiftUpButton = new JoystickButton(nesStick, 6);        

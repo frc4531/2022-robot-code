@@ -8,7 +8,6 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.ParallelDeadlineGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.subsystems.driveSubsystem;
-import frc.robot.subsystems.shooterAngleSubsystem;
 import frc.robot.subsystems.shooterWheelSubsystem;
 import frc.robot.subsystems.visionSubsystem;
 
@@ -17,13 +16,13 @@ import frc.robot.subsystems.visionSubsystem;
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class autoTwoBallStageFive extends ParallelDeadlineGroup {
   /** Creates a new autoTwoBallStageFive. */
-  public autoTwoBallStageFive(visionSubsystem vision,driveSubsystem drive,shooterAngleSubsystem shooterAngle, shooterWheelSubsystem shoot) {
+  public autoTwoBallStageFive(visionSubsystem vision,driveSubsystem drive, shooterWheelSubsystem shoot) {
     // Add the deadline command in the super() call. Add other commands using
     // addCommands().
     super(new WaitCommand(4));
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      new trackGoal(vision, drive, shooterAngle, shoot)
+      new trackGoal(vision, drive, shoot)
       );
   }
 }

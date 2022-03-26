@@ -7,7 +7,6 @@ import frc.robot.subsystems.*;
 public class trackGoal extends CommandBase {
     private final visionSubsystem m_visionSubsystem;
     private final driveSubsystem m_driveSubsystem;
-    private final shooterAngleSubsystem m_shooterAngleSubsystem;
     private final shooterWheelSubsystem m_shooterWheelSubsystem;
  
     boolean doneTrackingX = false; //Has the X axis finished tracking
@@ -16,56 +15,51 @@ public class trackGoal extends CommandBase {
     double turnSensitivity = 0.04; //Sensitivity constant for robot drive train
     double maxSpeed = 0.3; //Speed to turn robot at
 
-    double anglerTargetPosition; //Target position/angle
-    double anglerSpeed = 0.5; //Speed to move the angler motor at
-
     //Min and max camera Y values
     double farCameraY = -20.42;
     double closeCameraY = 4.89;
 
     //Min and max angler position
-    double minAnglerPosition = 0;
-    double maxAnglerPosition = 4450; //Subtract 73 from actual value here
+    double minShooterVelocity = 0;
+    double maxShooterVelocity = 4450;
+    double shooterTargetVelocity; //Target position/angle
+
+    //Variables needed to set velocity for shooter
+    double shooterCurrentSpeed;
+    double adjustInterval = 0.003;
 
     double trackedThreshold = 100;
 
-    //Variables needed to set velocity for shooter
-    double currentSpeed;
-    double adjustInterval = 0.003;
-    double targetVelocity;// = -14000;
 
-
-    public trackGoal(visionSubsystem vision_subsystem, driveSubsystem drive_subsystem, shooterAngleSubsystem shooterAngleSubsystem, shooterWheelSubsystem shooterWheelSubsystem) {
+    public trackGoal(visionSubsystem vision_subsystem, driveSubsystem drive_subsystem, shooterWheelSubsystem shooterWheelSubsystem) {
         
         m_visionSubsystem = vision_subsystem;
         m_driveSubsystem = drive_subsystem;
-        m_shooterAngleSubsystem = shooterAngleSubsystem;
         m_shooterWheelSubsystem = shooterWheelSubsystem;
 
         addRequirements(m_visionSubsystem);
         addRequirements(m_driveSubsystem);
-        addRequirements(m_shooterAngleSubsystem);
         addRequirements(m_shooterWheelSubsystem);
     }
 
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
-        currentSpeed = -0.8;
-        targetVelocity = -14000;//Preferences.getDouble("ShootVelocity", -14000);
+        shooterCurrentSpeed = -0.8;
+        shooterTargetVelocity = -14000;
     }
 
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        // ------- SPIN UP SHOOTER WHEEL TO TARGET VELOCITY -------
-        if (m_shooterWheelSubsystem.getVelocity() < targetVelocity) {
-            currentSpeed += adjustInterval;
-        } else if (m_shooterWheelSubsystem.getVelocity() > targetVelocity) {
-            currentSpeed -= adjustInterval;
-        }
+        // ------- SPIN UP SHOOTER WHEEL TO TARGET VELOCITY (OLD) -------
+        //if (m_shooterWheelSubsystem.getVelocity() < targetVelocity) {
+        //    currentSpeed += adjustInterval;
+        //} else if (m_shooterWheelSubsystem.getVelocity() > targetVelocity) {
+        //    currentSpeed -= adjustInterval;
+        //}
 
-        shooterWheelSubsystem.shooterWheel.set(currentSpeed);
+        //shooterWheelSubsystem.shooterWheel.set(currentSpeed);
         //shooterWheelSubsystem.shooterWheel.set(-0.8);
 
         // Only track the target if there is a target to track
@@ -83,20 +77,18 @@ public class trackGoal extends CommandBase {
             driveSubsystem.driveTrain.driveCartesian(0, 0, turn); //turn robot based on final turn value
 
             // -------ADJUST ANGLER BASED ON VISION Y VALUE: Map camera Y axis dataset to angler position dataset (linear) -------
-            anglerTargetPosition = (m_visionSubsystem.visY - closeCameraY) * (maxAnglerPosition / farCameraY);
+            shooterTargetVelocity = (m_visionSubsystem.visY - closeCameraY) * (maxShooterVelocity / farCameraY);
             // -------ADJUST ANGLER BASED ON VISION Y VALUE: MOVE MOTOR -------
 
-            //if motor needs to move up, and we haven't hit our max angle possible
-            if (m_shooterAngleSubsystem.getPosition() < anglerTargetPosition && m_shooterAngleSubsystem.getPosition() <= maxAnglerPosition) {
-                shooterAngleSubsystem.shooterAngler.set(anglerSpeed);
+            //if shooter needs to speed up, and we haven't hit our max velocity
+            if (m_shooterWheelSubsystem.getVelocity() < shooterTargetVelocity && m_shooterWheelSubsystem.getVelocity() <= maxShooterVelocity) {
+                shooterCurrentSpeed += adjustInterval;
 
             //if motor needs to move down, and the bottom limit switch isn't pressed
-            } else if (m_shooterAngleSubsystem.getPosition() > anglerTargetPosition && m_shooterAngleSubsystem.limitSwitch.get()) {
-                shooterAngleSubsystem.shooterAngler.set(-anglerSpeed);
+            } else if (m_shooterWheelSubsystem.getVelocity() > shooterTargetVelocity && m_shooterWheelSubsystem.getVelocity() >= minShooterVelocity) {
+                shooterCurrentSpeed -= adjustInterval;
 
             //otherwise default to not moving
-            } else {
-                shooterAngleSubsystem.shooterAngler.set(0);
             }
             
             // ------- DETERMINE/SIGNAL WHEN TRACKING IS COMPLETE -------
@@ -109,7 +101,7 @@ public class trackGoal extends CommandBase {
             }
 
             //if current Y position is within acceptable range, mark Y tracking as complete
-            if (m_shooterAngleSubsystem.getPosition() < anglerTargetPosition + trackedThreshold && m_shooterAngleSubsystem.getPosition() > anglerTargetPosition - trackedThreshold) {
+            if (m_shooterWheelSubsystem.getVelocity() < shooterTargetVelocity + trackedThreshold && m_shooterWheelSubsystem.getVelocity() > shooterTargetVelocity - trackedThreshold) {
                 doneTrackingY = true;
             } else {
                 doneTrackingY = false;
@@ -122,7 +114,6 @@ public class trackGoal extends CommandBase {
                 m_visionSubsystem.isLinedUp = false;
             }
         } else {
-            shooterAngleSubsystem.shooterAngler.set(0);
             driveSubsystem.driveTrain.driveCartesian(0, 0, 0);
         }
         
