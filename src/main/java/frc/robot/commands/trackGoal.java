@@ -49,6 +49,7 @@ public class trackGoal extends CommandBase {
     public void initialize() {
         shooterCurrentSpeed = -0.8;
         shooterTargetVelocity = -14000;
+        m_shooterWheelSubsystem.resetEncoder();
     }
 
     // Called every time the scheduler runs while the command is scheduled.

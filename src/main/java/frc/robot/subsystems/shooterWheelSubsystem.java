@@ -33,5 +33,9 @@ public class shooterWheelSubsystem extends SubsystemBase {
     public double getVelocity() {
         return shooterWheel.getSelectedSensorVelocity();
     }
+
+    public void resetEncoder() {
+        shooterWheel.setSelectedSensorPosition(0);
+    }
 }
 
