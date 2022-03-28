@@ -16,21 +16,18 @@ public class trackGoal extends CommandBase {
     double maxSpeed = 0.3; //Speed to turn robot at
 
     //Min and max camera Y values
-    double farCameraY = -24;
-    double closeCameraY = 8;
+    double farCameraY = -20.42;
+    double closeCameraY = 4.89;
 
     //Min and max angler position
-    double minShooterVelocity = -5000;
-    double maxShooterVelocity = -12000;
+    double minShooterVelocity = 0;
+    double maxShooterVelocity = 4450;
     
 
     //Variables needed to set velocity for shooter
     double shooterTargetVelocity; //Target position/angle
     double shooterCurrentSpeed;
     double adjustInterval = 0.003;
-
-    double minDiff;
-    double scaleRatio;
 
     double trackedXThreshold = 100;
     double trackedYThreshold = 100;
@@ -52,9 +49,6 @@ public class trackGoal extends CommandBase {
     public void initialize() {
         shooterCurrentSpeed = -0.8;
         shooterTargetVelocity = -14000;
-
-        minDiff = maxShooterVelocity - farCameraY;
-        scaleRatio = (minShooterVelocity - maxShooterVelocity) / (closeCameraY - farCameraY);
     }
 
     // Called every time the scheduler runs while the command is scheduled.
@@ -88,7 +82,7 @@ public class trackGoal extends CommandBase {
             // -------ADJUST ANGLER BASED ON VISION Y VALUE: Map camera Y axis dataset to angler position dataset (linear) -------
             
 
-            shooterTargetVelocity = ((m_visionSubsystem.visY - farCameraY) * scaleRatio) + maxShooterVelocity;
+            shooterTargetVelocity = ((m_visionSubsystem.visY - farCameraY) / ((closeCameraY - farCameraY) * (minShooterVelocity - maxShooterVelocity))) + maxShooterVelocity;
             // -------ADJUST ANGLER BASED ON VISION Y VALUE: MOVE MOTOR -------
 
             //if shooter needs to speed up, and we haven't hit our max velocity
