@@ -1,5 +1,4 @@
 package frc.robot.commands;
-import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.*;
 
@@ -22,13 +21,15 @@ public class trackGoal extends CommandBase {
     //Min and max angler position
     double minShooterVelocity = 0;
     double maxShooterVelocity = 4450;
-    double shooterTargetVelocity; //Target position/angle
+    
 
     //Variables needed to set velocity for shooter
+    double shooterTargetVelocity; //Target position/angle
     double shooterCurrentSpeed;
     double adjustInterval = 0.003;
 
-    double trackedThreshold = 100;
+    double trackedXThreshold = 100;
+    double trackedYThreshold = 100;
 
 
     public trackGoal(visionSubsystem vision_subsystem, driveSubsystem drive_subsystem, shooterWheelSubsystem shooterWheelSubsystem) {
@@ -90,18 +91,20 @@ public class trackGoal extends CommandBase {
 
             //otherwise default to not moving
             }
+
+            shooterWheelSubsystem.shooterWheel.set(shooterCurrentSpeed);
             
             // ------- DETERMINE/SIGNAL WHEN TRACKING IS COMPLETE -------
 
             //if current X position is within acceptable range, mark X tracking as complete
-            if (m_visionSubsystem.visX < trackedThreshold && m_visionSubsystem.visX > -trackedThreshold) {
+            if (m_visionSubsystem.visX < trackedXThreshold && m_visionSubsystem.visX > -trackedXThreshold) {
                 doneTrackingX = true;
             } else {
                 doneTrackingX = false;
             }
 
-            //if current Y position is within acceptable range, mark Y tracking as complete
-            if (m_shooterWheelSubsystem.getVelocity() < shooterTargetVelocity + trackedThreshold && m_shooterWheelSubsystem.getVelocity() > shooterTargetVelocity - trackedThreshold) {
+            //if currentshooter velocity is within acceptable range, mark Y tracking as complete
+            if (m_shooterWheelSubsystem.getVelocity() < shooterTargetVelocity + trackedYThreshold && m_shooterWheelSubsystem.getVelocity() > shooterTargetVelocity - trackedYThreshold) {
                 doneTrackingY = true;
             } else {
                 doneTrackingY = false;
@@ -128,7 +131,6 @@ public class trackGoal extends CommandBase {
     // Returns true when the command should end.
     @Override
     public boolean isFinished() {
-        //End if X and Y tracking are both complete
         return false;
     }
 
