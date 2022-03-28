@@ -28,6 +28,9 @@ public class trackGoal extends CommandBase {
     double shooterCurrentSpeed;
     double adjustInterval = 0.003;
 
+    double minDiff;
+    double scaleRatio;
+
     double trackedXThreshold = 100;
     double trackedYThreshold = 100;
 
@@ -48,6 +51,9 @@ public class trackGoal extends CommandBase {
     public void initialize() {
         shooterCurrentSpeed = -0.8;
         shooterTargetVelocity = -14000;
+
+        minDiff = maxShooterVelocity - farCameraY;
+        scaleRatio = (minShooterVelocity - maxShooterVelocity) / (closeCameraY - farCameraY);
     }
 
     // Called every time the scheduler runs while the command is scheduled.
@@ -78,7 +84,9 @@ public class trackGoal extends CommandBase {
             driveSubsystem.driveTrain.driveCartesian(0, 0, turn); //turn robot based on final turn value
 
             // -------ADJUST ANGLER BASED ON VISION Y VALUE: Map camera Y axis dataset to angler position dataset (linear) -------
-            shooterTargetVelocity = (m_visionSubsystem.visY - closeCameraY) * (maxShooterVelocity / farCameraY);
+            
+
+            shooterTargetVelocity = (m_visionSubsystem.visY - minDiff) * scaleRatio;
             // -------ADJUST ANGLER BASED ON VISION Y VALUE: MOVE MOTOR -------
 
             //if shooter needs to speed up, and we haven't hit our max velocity
