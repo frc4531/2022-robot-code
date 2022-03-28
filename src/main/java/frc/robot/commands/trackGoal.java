@@ -1,4 +1,5 @@
 package frc.robot.commands;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.*;
 
@@ -15,12 +16,12 @@ public class trackGoal extends CommandBase {
     double maxSpeed = 0.3; //Speed to turn robot at
 
     //Min and max camera Y values
-    double farCameraY = -20.42;
-    double closeCameraY = 4.89;
+    double farCameraY = -24;
+    double closeCameraY = 8;
 
     //Min and max angler position
-    double minShooterVelocity = 0;
-    double maxShooterVelocity = 4450;
+    double minShooterVelocity = -5000;
+    double maxShooterVelocity = -12000;
     
 
     //Variables needed to set velocity for shooter
@@ -59,6 +60,7 @@ public class trackGoal extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
+        SmartDashboard.putNumber("Shooter Wheel Velocity", m_shooterWheelSubsystem.getVelocity());
         // ------- SPIN UP SHOOTER WHEEL TO TARGET VELOCITY (OLD) -------
         //if (m_shooterWheelSubsystem.getVelocity() < targetVelocity) {
         //    currentSpeed += adjustInterval;
@@ -86,7 +88,7 @@ public class trackGoal extends CommandBase {
             // -------ADJUST ANGLER BASED ON VISION Y VALUE: Map camera Y axis dataset to angler position dataset (linear) -------
             
 
-            shooterTargetVelocity = (m_visionSubsystem.visY - minDiff) * scaleRatio;
+            shooterTargetVelocity = ((m_visionSubsystem.visY - farCameraY) * scaleRatio) + maxShooterVelocity;
             // -------ADJUST ANGLER BASED ON VISION Y VALUE: MOVE MOTOR -------
 
             //if shooter needs to speed up, and we haven't hit our max velocity
