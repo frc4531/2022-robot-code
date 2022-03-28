@@ -23,6 +23,9 @@ public class trackGoal extends CommandBase {
     double minShooterVelocity = -5000;
     double maxShooterVelocity = -15000;
     
+    double camRange = closeCameraY - farCameraY;
+    double velocityRange = minShooterVelocity - maxShooterVelocity;
+    double camToVelocityRatio = velocityRange / camRange;
 
     //Variables needed to set velocity for shooter
     double shooterTargetVelocity; //Target position/angle
@@ -83,9 +86,10 @@ public class trackGoal extends CommandBase {
             // -------ADJUST ANGLER BASED ON VISION Y VALUE: Map camera Y axis dataset to angler position dataset (linear) -------
             
 
-            shooterTargetVelocity = ((m_visionSubsystem.visY - farCameraY) / ((closeCameraY - farCameraY) * (minShooterVelocity - maxShooterVelocity))) + maxShooterVelocity;
+            shooterTargetVelocity = ((m_visionSubsystem.visY - farCameraY) * camToVelocityRatio) + maxShooterVelocity;
             // -------ADJUST ANGLER BASED ON VISION Y VALUE: MOVE MOTOR -------
             SmartDashboard.putNumber("Target Velocity", shooterTargetVelocity);
+            SmartDashboard.putNumber("Cam Velocity Ratio", camToVelocityRatio);
             //if shooter needs to speed up, and we haven't hit our max velocity
             if (m_shooterWheelSubsystem.getVelocity() < shooterTargetVelocity && m_shooterWheelSubsystem.getVelocity() <= maxShooterVelocity) {
                 shooterCurrentSpeed += adjustInterval;
