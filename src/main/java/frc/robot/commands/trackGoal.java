@@ -16,8 +16,8 @@ public class trackGoal extends CommandBase {
     double maxSpeed = 0.3; //Speed to turn robot at
 
     //Min and max camera Y values
-    double farCameraY = -20.42;
-    double closeCameraY = 4.89;
+    double farCameraY = -24;
+    double closeCameraY = 8;
 
     //Min and max angler position
     double minShooterVelocity = -5000;
