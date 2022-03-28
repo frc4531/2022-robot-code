@@ -20,8 +20,8 @@ public class trackGoal extends CommandBase {
     double closeCameraY = 4.89;
 
     //Min and max angler position
-    double minShooterVelocity = 0;
-    double maxShooterVelocity = 4450;
+    double minShooterVelocity = -5000;
+    double maxShooterVelocity = -15000;
     
 
     //Variables needed to set velocity for shooter
@@ -82,7 +82,7 @@ public class trackGoal extends CommandBase {
             // -------ADJUST ANGLER BASED ON VISION Y VALUE: Map camera Y axis dataset to angler position dataset (linear) -------
             
 
-            shooterTargetVelocity = ((m_visionSubsystem.visY - farCameraY) / ((closeCameraY - farCameraY) * (minShooterVelocity - maxShooterVelocity))) + maxShooterVelocity;
+            shooterTargetVelocity = (m_visionSubsystem.visY - farCameraY) / (closeCameraY - farCameraY) * (minShooterVelocity - maxShooterVelocity) + maxShooterVelocity;
             // -------ADJUST ANGLER BASED ON VISION Y VALUE: MOVE MOTOR -------
 
             //if shooter needs to speed up, and we haven't hit our max velocity
