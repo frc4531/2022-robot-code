@@ -82,9 +82,9 @@ public class trackGoal extends CommandBase {
             // -------ADJUST ANGLER BASED ON VISION Y VALUE: Map camera Y axis dataset to angler position dataset (linear) -------
             
 
-            shooterTargetVelocity = (m_visionSubsystem.visY - farCameraY) / (closeCameraY - farCameraY) * (minShooterVelocity - maxShooterVelocity) + maxShooterVelocity;
+            shooterTargetVelocity = ((m_visionSubsystem.visY - farCameraY) / ((closeCameraY - farCameraY) * (minShooterVelocity - maxShooterVelocity))) + maxShooterVelocity;
             // -------ADJUST ANGLER BASED ON VISION Y VALUE: MOVE MOTOR -------
-
+            SmartDashboard.putNumber("Target Velocity", shooterTargetVelocity);
             //if shooter needs to speed up, and we haven't hit our max velocity
             if (m_shooterWheelSubsystem.getVelocity() < shooterTargetVelocity && m_shooterWheelSubsystem.getVelocity() <= maxShooterVelocity) {
                 shooterCurrentSpeed += adjustInterval;
