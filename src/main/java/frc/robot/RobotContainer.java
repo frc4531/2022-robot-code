@@ -19,7 +19,8 @@ public class RobotContainer {
   private static RobotContainer m_robotContainer = new RobotContainer();
 
     // The robot's subsystems
-    public final climberSubsystem m_climberSubsystem = new climberSubsystem();
+    public final climberLeftSubsystem m_climberLeftSubsystem = new climberLeftSubsystem();
+    public final climberRightSubsystem m_climberRightSubsystem = new climberRightSubsystem();
     public final climberTraverseSubsystem m_climberTraverseSubsystem = new climberTraverseSubsystem();
     public final intakeSubsystem m_intakeSubsystem = new intakeSubsystem();
     public final elevatorSubsystem m_elevatorSubsystem = new elevatorSubsystem();
@@ -48,7 +49,8 @@ public class RobotContainer {
     m_shooterLiftSubsystem.setDefaultCommand(new shooterLiftStill( m_shooterLiftSubsystem ) );
     m_elevatorSubsystem.setDefaultCommand(new elevatorStill( m_elevatorSubsystem ) );
     m_intakeSubsystem.setDefaultCommand(new intakeStill( m_intakeSubsystem ) );
-    m_climberSubsystem.setDefaultCommand(new climberStill( m_climberSubsystem ) );
+    m_climberLeftSubsystem.setDefaultCommand(new climberLeftStill( m_climberLeftSubsystem ) );
+    m_climberRightSubsystem.setDefaultCommand(new climberRightStill(m_climberRightSubsystem) );
     m_climberTraverseSubsystem.setDefaultCommand(new climberTraverseStill(m_climberTraverseSubsystem) );
 
     // Configure autonomous sendable chooser
@@ -79,12 +81,20 @@ public class RobotContainer {
     trackButton.toggleWhenPressed(new trackGoal(m_visionSubsystem, m_driveSubsystem, m_shooterWheelSubsystem) ,true);
 
 
-    final JoystickButton climberUpBotton = new JoystickButton(driveStick, 7);        
-    climberUpBotton.whileHeld(new climberUp( m_climberSubsystem ) ,true);
+    final JoystickButton climberLeftUpBotton = new JoystickButton(driveStick, 5);        
+    climberLeftUpBotton.whileHeld(new climberLeftUp( m_climberLeftSubsystem ) ,true);
 
 
-    final JoystickButton climberDownButton = new JoystickButton(driveStick, 8);        
-    climberDownButton.whileHeld(new climberDown( m_climberSubsystem ) ,true);
+    final JoystickButton climberLeftDownButton = new JoystickButton(driveStick, 10);        
+    climberLeftDownButton.whileHeld(new climberLeftDown( m_climberLeftSubsystem ) ,true);
+
+
+    final JoystickButton climberRightUpButton = new JoystickButton(driveStick, 7);
+    climberRightUpButton.whileHeld(new climberRightUp(m_climberRightSubsystem) ,true);
+
+
+    final JoystickButton climberRightDownButton = new JoystickButton(driveStick, 8);
+    climberRightDownButton.whileHeld(new climberRightDown(m_climberRightSubsystem) ,true);
 
 
     final JoystickButton shooterWheelShootButton = new JoystickButton(nesStick, 10);        

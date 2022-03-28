@@ -1,16 +1,16 @@
 package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-import frc.robot.subsystems.climberSubsystem;
+import frc.robot.subsystems.climberLeftSubsystem;
 
 
-public class climberDown extends CommandBase {
-    private final climberSubsystem m_climberSubsystem;
+public class climberLeftDown extends CommandBase {
+    private final climberLeftSubsystem m_climberLeftSubsystem;
 
 
-    public climberDown(climberSubsystem subsystem) {
-        m_climberSubsystem = subsystem;
-        addRequirements(m_climberSubsystem);
+    public climberLeftDown(climberLeftSubsystem subsystem) {
+        m_climberLeftSubsystem = subsystem;
+        addRequirements(m_climberLeftSubsystem);
     }
 
     // Called when the command is initially scheduled.
@@ -21,7 +21,7 @@ public class climberDown extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        climberSubsystem.climberLeftMotor.set(-0.8);
+        climberLeftSubsystem.climberLeftMotor.set(-0.8);
     }
 
     // Called once the command ends or is interrupted.

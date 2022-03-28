@@ -23,7 +23,7 @@ public class shooterWheelShoot extends CommandBase {
     @Override
     public void initialize() {
         currentSpeed = -0.8;
-        targetVelocity = Preferences.getDouble("ShootVelocity", -14000);
+        targetVelocity = Preferences.getDouble("ShootVelocity", -10000);
     }
 
     // Called every time the scheduler runs while the command is scheduled.

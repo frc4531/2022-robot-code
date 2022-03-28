@@ -8,16 +8,12 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
 
-public class climberSubsystem extends SubsystemBase {
+public class climberLeftSubsystem extends SubsystemBase {
     public static WPI_TalonFX climberLeftMotor;
-    public static WPI_TalonFX climberRightMotor;
 
     
-    public climberSubsystem() {
+    public climberLeftSubsystem() {
         climberLeftMotor = new WPI_TalonFX(7);
-
-        climberRightMotor = new WPI_TalonFX(8);
-        climberRightMotor.follow(climberLeftMotor);
     }
 
     @Override
