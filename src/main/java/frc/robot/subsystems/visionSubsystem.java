@@ -55,11 +55,13 @@ public class visionSubsystem extends SubsystemBase {
         SmartDashboard.putNumber("Limelight A Value", visA);
         SmartDashboard.putNumber("Limelight V Value", visV);
 
-        if (isLinedUp) {
+        SmartDashboard.putBoolean("Lined Up?", isLinedUp);
+
+        /*if (isLinedUp) {
             ledBlinkin.set(0.77);
         } else {
             ledBlinkin.set(0.61);
-        }
+        }*/
     }
 
     @Override

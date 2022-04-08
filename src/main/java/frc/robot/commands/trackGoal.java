@@ -17,11 +17,11 @@ public class trackGoal extends CommandBase {
 
     //Min and max camera Y values
     double farCameraY = -24;
-    double closeCameraY = 8;
+    double closeCameraY = -10;
 
     //Min and max angler position
-    double minShooterVelocity = -5000;
-    double maxShooterVelocity = -15000;
+    double minShooterVelocity = -10800;
+    double maxShooterVelocity = -13450;
     
     double camRange = closeCameraY - farCameraY;
     double velocityRange = minShooterVelocity - maxShooterVelocity;
@@ -30,10 +30,10 @@ public class trackGoal extends CommandBase {
     //Variables needed to set velocity for shooter
     double shooterTargetVelocity; //Target position/angle
     double shooterCurrentSpeed;
-    double adjustInterval = 0.003;
+    double adjustInterval = 0.002;
 
     double trackedXThreshold = 100;
-    double trackedYThreshold = 100;
+    double trackedYThreshold = 350;
 
 
     public trackGoal(visionSubsystem vision_subsystem, driveSubsystem drive_subsystem, shooterWheelSubsystem shooterWheelSubsystem) {
@@ -50,7 +50,7 @@ public class trackGoal extends CommandBase {
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
-        shooterCurrentSpeed = -0.8;
+        shooterCurrentSpeed = -0.65;
         shooterTargetVelocity = -14000;
         m_shooterWheelSubsystem.resetEncoder();
     }
@@ -70,7 +70,7 @@ public class trackGoal extends CommandBase {
         //shooterWheelSubsystem.shooterWheel.set(-0.8);
 
         // Only track the target if there is a target to track
-        if(m_visionSubsystem.visV == 1) {
+        if(m_visionSubsystem.visV == 1 && m_visionSubsystem.visY <= closeCameraY && m_visionSubsystem.visY >= farCameraY) {
             // -------TURN DRIVE TRAIN BASED ON VISION X VALUE -------
             double turn = m_visionSubsystem.visX*turnSensitivity*-1; //determine turn value based on camera X axis & sensitivity constant 
             
@@ -91,12 +91,12 @@ public class trackGoal extends CommandBase {
             SmartDashboard.putNumber("Target Velocity", shooterTargetVelocity);
             SmartDashboard.putNumber("Cam Velocity Ratio", camToVelocityRatio);
             //if shooter needs to speed up, and we haven't hit our max velocity
-            if (m_shooterWheelSubsystem.getVelocity() < shooterTargetVelocity && m_shooterWheelSubsystem.getVelocity() <= maxShooterVelocity) {
-                shooterCurrentSpeed += adjustInterval;
+            if (m_shooterWheelSubsystem.getVelocity() < shooterTargetVelocity /*&& m_shooterWheelSubsystem.getVelocity() >= maxShooterVelocity*/) {
+                shooterCurrentSpeed = shooterCurrentSpeed + adjustInterval;
 
             //if motor needs to move down, and the bottom limit switch isn't pressed
-            } else if (m_shooterWheelSubsystem.getVelocity() > shooterTargetVelocity && m_shooterWheelSubsystem.getVelocity() >= minShooterVelocity) {
-                shooterCurrentSpeed -= adjustInterval;
+            } else if (m_shooterWheelSubsystem.getVelocity() > shooterTargetVelocity /*&& m_shooterWheelSubsystem.getVelocity() <= minShooterVelocity*/) {
+                shooterCurrentSpeed = shooterCurrentSpeed - adjustInterval;
 
             //otherwise default to not moving
             }
@@ -121,8 +121,14 @@ public class trackGoal extends CommandBase {
 
             //Send signal if X and Y are both lined up
             if (doneTrackingX && doneTrackingY) {
+                if (m_visionSubsystem.isLinedUp == false) {
+                    m_visionSubsystem.ledBlinkin.set(0.77);
+                }
                 m_visionSubsystem.isLinedUp = true;
             } else {
+                if(m_visionSubsystem.isLinedUp == true) {
+                    m_visionSubsystem.ledBlinkin.set(0.61);
+                }
                 m_visionSubsystem.isLinedUp = false;
             }
         } else {
@@ -135,6 +141,7 @@ public class trackGoal extends CommandBase {
     @Override
     public void end(boolean interrupted) {
         m_visionSubsystem.isLinedUp = false;
+        m_visionSubsystem.ledBlinkin.set(0.61);
     }
 
     // Returns true when the command should end.

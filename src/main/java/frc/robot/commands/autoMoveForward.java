@@ -17,7 +17,7 @@ public class autoMoveForward extends ParallelDeadlineGroup {
   public autoMoveForward(driveSubsystem driveSub) {
     // Add the deadline command in the super() call. Add other commands using
     // addCommands().
-    super(new WaitCommand(1.4));
+    super(new WaitCommand(0.7));
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
       new moveCommand(driveSub, 0, 0.5, 0)
