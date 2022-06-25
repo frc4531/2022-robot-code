@@ -16,11 +16,11 @@ public class trackGoal extends CommandBase {
     double maxSpeed = 0.3; //Speed to turn robot at
 
     //Min and max camera Y values
-    double farCameraY = -24;
+    double farCameraY = -23;
     double closeCameraY = -10;
 
     //Min and max angler position
-    double minShooterVelocity = -10800;
+    double minShooterVelocity = -11600;
     double maxShooterVelocity = -13450;
     
     double camRange = closeCameraY - farCameraY;
@@ -50,7 +50,7 @@ public class trackGoal extends CommandBase {
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
-        shooterCurrentSpeed = -0.65;
+        shooterCurrentSpeed = -0.55;
         shooterTargetVelocity = -14000;
         m_shooterWheelSubsystem.resetEncoder();
     }
