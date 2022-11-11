@@ -66,11 +66,13 @@ public class driveSubsystem extends SubsystemBase {
     }
     // Put methods for controlling this subsystem here. Call these from Commands.
     public static double getPosition() {
-        return backRight.getSelectedSensorPosition();
+        return 0.0;
+        //return backRight.getSelectedSensorPosition();
     }
 
     public double getVelocity() {
-        return backRight.getSelectedSensorVelocity();
+        return 0.0;
+        //return backRight.getSelectedSensorVelocity();
     }
 
     public static void resetEncoder() {

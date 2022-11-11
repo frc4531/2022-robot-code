@@ -82,23 +82,23 @@ public class RobotContainer {
 
 
     final JoystickButton climberLeftUpBotton = new JoystickButton(driveStick, 5);        
-    climberLeftUpBotton.whileHeld(new climberLeftUp( m_climberLeftSubsystem ) ,true);
+    //climberLeftUpBotton.whileHeld(new climberLeftUp( m_climberLeftSubsystem ) ,true);
 
 
     final JoystickButton climberLeftDownButton = new JoystickButton(driveStick, 10);        
-    climberLeftDownButton.whileHeld(new climberLeftDown( m_climberLeftSubsystem ) ,true);
+    //climberLeftDownButton.whileHeld(new climberLeftDown( m_climberLeftSubsystem ) ,true);
 
 
     final JoystickButton climberRightUpButton = new JoystickButton(driveStick, 7);
-    climberRightUpButton.whileHeld(new climberRightUp(m_climberRightSubsystem) ,true);
+    //climberRightUpButton.whileHeld(new climberRightUp(m_climberRightSubsystem) ,true);
 
 
     final JoystickButton climberRightDownButton = new JoystickButton(driveStick, 8);
-    climberRightDownButton.whileHeld(new climberRightDown(m_climberRightSubsystem) ,true);
+    //climberRightDownButton.whileHeld(new climberRightDown(m_climberRightSubsystem) ,true);
 
 
     final JoystickButton shooterWheelShootButton = new JoystickButton(nesStick, 10);        
-    shooterWheelShootButton.whileHeld(new shooterWheelShoot( m_shooterWheelSubsystem ) ,true);
+    //shooterWheelShootButton.whileHeld(new shooterWheelShoot( m_shooterWheelSubsystem ) ,true);
 
 
     final JoystickButton intakeLiftDownButton = new JoystickButton(nesStick, 4);        
@@ -141,10 +141,10 @@ public class RobotContainer {
     intakeOutButton.whileHeld(new intakeOut( m_intakeSubsystem ) ,true);
 
     final JoystickButton climberTraverseForwardButton = new JoystickButton(driveStick, 13);        
-    climberTraverseForwardButton.whileHeld(new climberTraverseForward( m_climberTraverseSubsystem ) ,true);
+    //climberTraverseForwardButton.whileHeld(new climberTraverseForward( m_climberTraverseSubsystem ) ,true);
 
     final JoystickButton climberTraverseBackwardButton = new JoystickButton(driveStick, 14);        
-    climberTraverseBackwardButton.whileHeld(new climberTraverseBackward( m_climberTraverseSubsystem ) ,true);
+    //climberTraverseBackwardButton.whileHeld(new climberTraverseBackward( m_climberTraverseSubsystem ) ,true);
   }
 
 
